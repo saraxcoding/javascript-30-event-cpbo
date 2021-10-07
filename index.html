@@ -42,18 +42,20 @@
 
 <button></button>
 <script>
-  /*bubbling ripples from inner nested item out, captures goes from top down */
+  /*bubbling ripples from inner nested item out, captures goes from top of parent to down children */
   const divs = document.querySelectorAll('div');
 
   function logText(e) {
-    //console.log(this.classList.value);
+    console.log(this.classList.value);
+    e.stopPropagation(); // stops bubbling event
     //console.log(this);
   }
 
   document.body.addEventListener('click', logText);
 
   divs.forEach(div => div.addEventListener('click', logText, {
-    capture: true; //opposite of the default (which is false), runs the function on the way down within nested elements
+    //capture: true // opposite of the default (which is false), runs the function on the way down within nested elements
+    capture: false
   }));
 </script>
 </body>
